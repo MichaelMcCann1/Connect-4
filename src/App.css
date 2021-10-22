@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.githubLink {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+}
+
+.githubLink > img {
+  opacity: 0.5;
+  width: 30px;
+  height: 30px;
+  transition: all .5s ease;
+}
+
+.githubLink:hover > img {
+  opacity: 1;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(195, 231, 138);
+}
+
+.game {
+  height: 70vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.board {
+  height: calc(100% / 7 * 6);
+  max-width: 95vw;
+  aspect-ratio: 7/6;
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.slot {
+  width: calc(100% / 7);
+  background-color: rgb(69, 69, 241);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hole {
+  content: '';
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+}
+
+.topSlot > .hole {
+  opacity: 0;
+}
+
+.topSlot:hover > .hole {
+  opacity: 1;
+}
+
+.entry {
+  display: flex;
+  width: 100%;
+  height: calc(100% / 7);
+  background-color: white;
+}
+
+.topSlot {
+  width: calc(100% / 7);
+  height: 100%;
+  background-color: rgba(115, 185, 115, 0.315);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.topSlot:hover {
+  background-color: rgba(10, 240, 10, 0.384);
+}
+
+.modalBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-content: center;
+}
+
+.modal {
+  width: 300px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.playAgain {
+  background-color: lightgray;
+  padding: 1em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.playAgain:hover {
+  background-color: rgb(223, 222, 222);
+}
+
+
+@media screen and (max-width: 600px) {
+  .game {
+    height: 90vmin;
+  }
+}
