@@ -25,7 +25,7 @@
 
 .App {
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,8 +44,7 @@
 
 .board {
   height: calc(100% / 7 * 6);
-  max-width: 95vw;
-  aspect-ratio: 7/6;
+  width: 70vmin;
   display: flex;
   flex-wrap: wrap-reverse;
 }
@@ -132,5 +131,9 @@
 @media screen and (max-width: 600px) {
   .game {
     height: 90vmin;
+  }
+
+  .board {
+    width: 90vmin;
   }
 }

@@ -1,20 +1,20 @@
 import React from 'react'
 
 type Props = {
-  position: number;
+  columnNumber: number;
   takeTurn: Function;
   color: string;
 }
 
-const Entry = ({position, takeTurn, color}: Props) => {
+const Entry = ({columnNumber, takeTurn, color}: Props) => {
 
-  const handleClick = function(position: number){
-    takeTurn(position)
+  const handleClick = function(columnNumber: number){
+    takeTurn(columnNumber)
   }
 
   return (
     <div className="topSlot">
-      <div className="hole" onClick={() => handleClick(position)} style={{background: color}}></div>
+      <div className="hole" onClick={() => handleClick(columnNumber)} style={{background: color}}></div>
     </div>
   )
 }

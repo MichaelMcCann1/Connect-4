@@ -1,19 +1,11 @@
-import React from 'react'
-
 type Props = {
-  position: number;
   color: string
 }
 
-const Slot = ({position, color}: Props) => {
-
-  const handleClick = function(num: number){
-    console.log(num)
-    console.log(color)
-  }
+const Slot = ({color}: Props) => {
   
   return (
-    <div className="slot" onClick={() => handleClick(position)}>
+    <div className="slot">
       <div className="hole" style={{background: color}}></div>
     </div>
   )

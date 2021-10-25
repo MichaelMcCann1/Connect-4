@@ -5,37 +5,40 @@ import { useState, useEffect } from 'react'
 import winningArray from './winningArray';
 
 function App() {
-  const entryArray: number[] = Array(7).fill(1)
 
-  const [slotArray, setSlotArray] = useState(Array(42).fill(""))
-  const [turn, setTurn] = useState(0)
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+  const [gameArray, setGameArray] = useState(Array(42).fill(""))
+  const [firstTurn, setFirstTurn] = useState(true)
   const [color, setColor] = useState('Yellow')
   const [winner, setWinner] = useState('')
+  const entryArray: number[] = Array(7).fill(1)
 
-  const takeTurn = function(position: number){
-    if (slotArray[position + 35]) return
-    let result = [...slotArray]
-    position = getSlotNumber(position)
-    result[position] = color
-    setSlotArray(result)
-    setTurn(turn + 1)
+  const takeTurn = function(columnNumber: number){
+    if (gameArray[columnNumber + 35]) return //collumn on board is full
+    let result = [...gameArray]
+    columnNumber = getSlotNumber(columnNumber)
+    result[columnNumber] = color
+    setGameArray(result)
+    setFirstTurn(false)
     setColor(color === 'Yellow' ? 'Red' : 'Yellow')
   }
 
-  const getSlotNumber = function(row: number){
+  const getSlotNumber = function(columnNumber: number){
     for (let i=0; i<7; i++){
-      if (!slotArray[row + 7*i]) return row + 7*i
+      if (!gameArray[columnNumber + 7*i]) return columnNumber + 7*i
     }
-    return row
+    return columnNumber
   }
 
   const checkWinner = function(color: string){
-    color === 'Yellow' ? color = 'Red' : color = 'Yellow'
+    color === 'Yellow' ? color = 'Red' : color = 'Yellow' //check previous color
 
     for (let i=0; i<winningArray.length; i++){
       let winner = true
       for (let j=0; j<4; j++){
-        if (color !== slotArray[winningArray[i][j]]) {
+        if (color !== gameArray[winningArray[i][j]]) {
           winner = false
         }
       }
@@ -44,29 +47,29 @@ function App() {
   }
 
   const resetGame = function(){
-    setSlotArray(Array(42).fill(""))
-    setTurn(0)
+    setGameArray(Array(42).fill(""))
+    setFirstTurn(true)
     setColor('Yellow')
     setWinner('')
   }
 
   useEffect(() => {
-    if (turn === 0) return
+    if (!firstTurn) return
     checkWinner(color)
-  }, [slotArray])
+  }, [gameArray])
 
   return (
     <div className="App">
-      <a className="githubLink" href="https://github.com/MichaelMcCann1/Connect-4"><img src="Images/GitHub.svg"></img></a>
+      <a className="githubLink" href="https://github.com/MichaelMcCann1/Connect-4"><img src="Images/GitHub.svg" alt="GitHub Link"></img></a>
       <div className="game">
         <div className="entry">
           {entryArray.map((entry, index: number) => (
-            <Entry key={index} position={index} takeTurn={takeTurn} color={color}/>
+            <Entry key={index} columnNumber={index} takeTurn={takeTurn} color={color}/>
           ))}
         </div>
         <div className="board">
-          {slotArray.map((slot, index: number) => (
-            <Slot key={index} position={index} color={slotArray[index]}/>
+          {gameArray.map((slot, index: number) => (
+            <Slot key={index} color={gameArray[index]}/>
           ))}
         </div>
       </div>
